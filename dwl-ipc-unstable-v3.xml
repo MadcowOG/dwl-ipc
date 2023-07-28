@@ -46,6 +46,7 @@
             </description>
             <arg name="amount" type="uint"/>
         </event>
+        <!-- TODO: Consider removing this event and just sending an amount instead -->
         <event name="layout">
             <description summary="Announces a layout">
                 This event is sent after binding.
@@ -78,7 +79,7 @@
         </request>
         <request name="set_client_tags">
             <description summary="set the tags of the selected client"/>
-            <arg name="tagmask" type="the new tagmask for the selected client"></arg>
+            <arg name="tagmask" type="uint" summary="the new tagmask for the selected client"></arg>
         </request>
         <request name="set_layout">
             <description summary="set the layout of this output"/>
@@ -105,12 +106,15 @@
             <arg name="seltags" type="uint" summary="the tags of the selected client, 0 if there is no selected client"/>
             <arg name="urgent" type="uint" summary="the urgent tags, 0 if no tags are urgent"/>
         </event>
+        <!-- TODO: Consider merging layout and layout_symbol -->
         <event name="layout">
             <description summary="update the layout">
                 Indicates a new layout is selected.
-                This should be used to keep track of the compositor's active layout for when the client wants to change the layout.
+                index should be used to keep track of the compositor's active layout for when the client wants to change the layout.
+                symbol should take precendence when displaying the current layout.
             </description>
-            <arg name="layout" type="uint" summary="index of the layout"/>
+            <arg name="index" type="uint" summary="index of the layout"/>
+            <arg name="symbol" type="string" summary="The new layout"/>
         </event>
         <event name="layout_symbol">
             <description summary="update the current layout symbol">
