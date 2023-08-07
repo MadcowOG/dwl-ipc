@@ -75,81 +75,63 @@
         <request name="set_tags">
             <description summary="set the active tags of this output"/>
             <arg name="tagmask" type="uint" summary="bitmask of the tags that should be set"/>
-            <arg name="toggle_tagset" type="uint" summary="boolean value, toggle the selected tagset"/>
+            <arg name="toggle_tagset" type="uint" summary="boolean value, toggle the active tagset"/>
         </request>
         <request name="set_client_tags">
             <description summary="set the tags of the selected client"/>
-            <arg name="tagmask" type="uint" summary="the new tagmask for the selected client"></arg>
+            <arg name="tagmask" type="uint" summary="the new tagmask for the selected client"/>
         </request>
         <request name="set_layout">
             <description summary="set the layout of this output"/>
             <arg name="index" type="uint" summary="index of a layout recieved by dwl_ipc_manager.layout"/>
         </request>
         <event name="title">
-            <description summary="update title">
-                Indicates the title has changed.
+            <description summary="client title">
+                The currently selected client title.
             </description>
-            <arg name="title" type="string" summary="the new title"/>
+            <arg name="title" type="string"/>
         </event>
         <event name="appid">
-            <description summary="update appid">
-                Indicates the appid has changed.
+            <description summary="client appid">
+                The currently selected client appid.
             </description>
-            <arg name="appid" type="string" summary="the new appid"/>
+            <arg name="appid" type="string"/>
         </event>
         <event name="tags">
-            <description summary="update the state of the tags">
-                Indicates that tags have updated.
-            </description>
+            <description summary="tag states"/>
             <arg name="tagset" type="uint" summary="the active tagset"/>
             <arg name="occupied" type="uint" summary="the occupied tags, 0 if no tags are occupied"/>
             <arg name="seltags" type="uint" summary="the tags of the selected client, 0 if there is no selected client"/>
             <arg name="urgent" type="uint" summary="the urgent tags, 0 if no tags are urgent"/>
         </event>
-        <!-- TODO: Consider merging layout and layout_symbol -->
         <event name="layout">
-            <description summary="update the layout">
-                Indicates a new layout is selected.
-                index should be used to keep track of the compositor's active layout for when the client wants to change the layout.
-                symbol should take precendence when displaying the current layout.
+            <description summary="the current layout">
+                Index should be used to keep track of the compositor's active layout for when the client wants to change the layout.
+                Symbol should take precendence when displaying the current layout.
             </description>
             <arg name="index" type="uint" summary="index of the layout"/>
-            <arg name="symbol" type="string" summary="The new layout"/>
-        </event>
-        <event name="layout_symbol">
-            <description summary="update the current layout symbol">
-                Indicates the layout has changed. Since layout symbols are dynamic,
-                as opposed to the zdwl_ipc_manager.layout event, this should take precendence when displaying.
-            </description>
-            <arg name="symbol" type="string" summary="The new layout"/>
+            <arg name="symbol" type="string" summary="the layout's symbol"/>
         </event>
         <event name="fullscreen">
-            <description summary="update fullscreen status">
-                Indicates if the selected client on this output is fullscreen.
-            </description>
-            <arg name="is_fullscreen" type="uint" summary="boolean value, the selected client is fullscreen"/>
+            <description summary="client fullscreen status"/>
+            <arg name="is_fullscreen" type="uint" summary="boolean value"/>
         </event>
         <event name="floating">
-            <description summary="update floating status">
-                Indicates if the selected client on this output is floating.
-            </description>
-            <arg name="is_floating" type="uint" summary="boolean value, the selected client is floating"/>
+            <description summary="client floating status"/>
+            <arg name="is_floating" type="uint" summary="boolean value"/>
         </event>
         <event name="selected">
-            <description summary="update the selected output.">
-                Indicates if the output is selected.
-            </description>
-            <arg name="is_selected" type="uint" summary="boolean value, the output is selected"/>
+            <description summary="the output focus status"/>
+            <arg name="is_selected" type="uint" summary="boolean value"/>
         </event>
         <event name="toggle_visibility">
             <description summary="toggle client visibilty">
-                Indicates the client should hide or show.
-                If the client is visible then hide, if hidden then show.
+                The client should hide or show. If the client is visible then hide, if hidden then show.
             </description>
         </event>
         <event name="done">
             <description summary="The update sequence is done.">
-                Indicates that a sequence of status updates have finished and the client should redraw.
+                A sequence of status updates have finished and the client should redraw.
             </description>
         </event>
     </interface>
